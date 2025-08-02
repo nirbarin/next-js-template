@@ -12,13 +12,12 @@
 1. [Create a production D1 database.](https://developers.cloudflare.com/d1/get-started/#3-create-a-database)
 2. The starter kit focuses on 2 environments, **development on local machine** and **production on
    remote machine**. So, create the following files:
-
-   1. `.env.development`: duplicate `.env.example`, and set the variables to development values.
-   2. `.env.production`: duplicate `.env.example`, and set the variables to production values.
-   3. `wrangler.toml.development`: duplicate `wrangler.toml.example`, and set the variables to
-      development values.
-   4. `wrangler.toml.production`: duplicate `wrangler.toml.example`, and set the variables to
-      production values.
+    1. `.env.development`: duplicate `.env.example`, and set the variables to development values.
+    2. `.env.production`: duplicate `.env.example`, and set the variables to production values.
+    3. `wrangler.toml.development`: duplicate `wrangler.toml.example`, and set the variables to
+       development values.
+    4. `wrangler.toml.production`: duplicate `wrangler.toml.example`, and set the variables to
+       production values.
 
 3. Install the app's dependencies:
 
