@@ -24,6 +24,11 @@ import Hero from "@/components/usr/hero"
 
 export const runtime = "edge"
 
+/**
+ * Renders the main landing page with a hero section, feature highlights, a live customer management demo, and call-to-action links.
+ *
+ * Fetches and displays a list of customer IDs, and provides a form to add new customers. The page is styled with UI components and designed for the Next.js edge runtime.
+ */
 export default async function Home() {
 	"use server"
 	const customers = await getCustomers()

@@ -1,3 +1,12 @@
+/**
+ * Renders a styled section with a kicker, title, body text, and an optional list of bullet points.
+ *
+ * @param kicker - Short label or category displayed above the title
+ * @param title - Main heading of the section
+ * @param body - Descriptive text content for the section
+ * @param bullets - Optional array of bullet point strings to display as a list
+ * @returns A React element representing the formatted section
+ */
 export default function Section({
 	kicker,
 	title,

@@ -4,6 +4,14 @@ type HeroProps = {
 	description: string
 }
 
+/**
+ * Renders a centered hero section with a tag label, prominent title, and descriptive text.
+ *
+ * @param tag - The label displayed above the title
+ * @param title - The main heading text
+ * @param description - The supporting descriptive text below the title
+ * @returns A React element representing the hero section
+ */
 export default function Hero({ tag, title, description }: HeroProps) {
 	return (
 		<div className="text-center">

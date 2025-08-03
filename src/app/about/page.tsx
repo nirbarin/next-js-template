@@ -3,6 +3,11 @@ import Feature from "@/components/usr/feature"
 import Section from "@/components/usr/section"
 import Hero from "@/components/usr/hero"
 
+/**
+ * Renders the About page with an overview of the template's features, philosophy, included technologies, and calls to action.
+ *
+ * Displays a hero section, a grid of feature highlights, informational sections about the template's approach and contents, and a call-to-action area with navigation links.
+ */
 export default function AboutPage() {
 	return (
 		<section className="relative">

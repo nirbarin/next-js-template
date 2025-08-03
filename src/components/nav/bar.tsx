@@ -32,6 +32,14 @@ type NavbarConfig = {
 	showThemeToggle?: boolean
 }
 
+/**
+ * Renders a responsive navigation bar with optional logo, navigation links, action items, and a theme toggle for a Next.js application.
+ *
+ * The navigation bar adapts its layout for different screen sizes, displaying a horizontal menu on larger screens and a slide-in sheet menu on mobile devices. Navigation and action items support external links, and the active navigation item is highlighted based on the current route.
+ *
+ * @param config - Configuration object specifying logo, navigation items, action items, and theme toggle visibility
+ * @param className - Optional additional class names for the header element
+ */
 export default function Navbar({
 	config,
 	className,
