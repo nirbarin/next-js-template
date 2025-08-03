@@ -134,10 +134,22 @@ export default function Navbar({
 							</SheetHeader>
 							<div className="mt-4 flex flex-col gap-1">
 								{nav.map((item) => {
-									const isActive =
-										item.href !== "/" && pathname?.startsWith(item.href)
-											? true
-											: pathname === item.href
+// extract the duplicated “isActive” logic into a helper
+const getIsActive = (href: string) => {
+  return href !== "/" && pathname?.startsWith(href)
+    ? true
+    : pathname === href;
+};
+
+{nav.map((item) => {
+-  const isActive =
+-    item.href !== "/" && pathname?.startsWith(item.href)
+-      ? true
+-      : pathname === item.href
++  const isActive = getIsActive(item.href);
+
+  // …rest of your rendering logic
+})}
 									return (
 										<Link
 											key={item.href + item.label}
