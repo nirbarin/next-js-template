@@ -49,6 +49,11 @@ export default function Navbar({
 }) {
 	const pathname = usePathname()
 	const { logo, nav = [], actions = [], showThemeToggle = true } = config
+  const getIsActive = (href: string) => {
+  return href !== "/" && pathname?.startsWith(href)
+    ? true
+    : pathname === href
+}
 
 	return (
 		<header className={cn("w-full border-b bg-background", className)}>
@@ -141,11 +146,13 @@ export default function Navbar({
 								</SheetPrimitive.Close>
 							</SheetHeader>
 							<div className="mt-4 flex flex-col gap-1">
-								{nav.map((item) => {
-									const isActive =
-										item.href !== "/" && pathname?.startsWith(item.href)
-											? true
-											: pathname === item.href
+
+              {nav.map((item) => {
+              const isActive = item.href !== "/" && pathname?.startsWith(item.href)
+                    ? true
+                    : pathname === item.href
+                const isActive = getIsActive(item.href)
+
 									return (
 										<Link
 											key={item.href + item.label}

@@ -29,6 +29,7 @@ const navbarConfig = {
 	],
 	showThemeToggle: true,
 }
+
 /**
  * Defines the root layout for the Next.js application, applying global theming, navigation, and structure.
  *

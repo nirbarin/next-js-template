@@ -27,8 +27,8 @@ export default function Section({
 			<p className="text-muted-foreground">{body}</p>
 			{bullets && bullets.length > 0 && (
 				<ul className="mt-2 list-disc space-y-1 pl-5 text-muted-foreground">
-					{bullets.map((b) => (
-						<li key={b}>{b}</li>
+					{bullets.map((b, index) => (
+						<li key={index}>{b}</li>
 					))}
 				</ul>
 			)}
