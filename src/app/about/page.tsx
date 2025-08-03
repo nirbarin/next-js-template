@@ -1,23 +1,17 @@
 import Link from "next/link"
 import Feature from "@/components/usr/feature"
 import Section from "@/components/usr/section"
+import Hero from "@/components/usr/hero"
 
 export default function AboutPage() {
 	return (
 		<section className="relative">
 			<div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-				<div className="text-center">
-					<span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-						About
-					</span>
-					<h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-						A modern starter to build, ship, and scale faster
-					</h1>
-					<p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-						This Next.js template brings together best-in-class tooling like TypeScript,
-						shadcn/ui, and a thoughtful DX, so you can focus on product, not plumbing.
-					</p>
-				</div>
+				<Hero
+					tag="About"
+					title="A modern starter to build, ship, and scale faster"
+					description="This Next.js template brings together best-in-class tooling like TypeScript, shadcn/ui, and a thoughtful DX, so you can focus on product, not plumbing."
+				/>
 
 				<div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 					<Feature
