@@ -1,38 +1,39 @@
 import { revalidatePath } from "next/cache"
 import { db } from "@/server/db"
-import type { PgTable } from "drizzle-orm/pg-core"
+import type { AnySQLiteTable } from "drizzle-orm/sqlite-core"
+import { eq } from "drizzle-orm"
 
 export const runtime = "edge"
 
 export function generateCrudFunctions<T extends Record<string, any>>(
-	table: PgTable,
+	table: AnySQLiteTable,
 	revalidationPath: string = "/"
 ) {
 	const getAll = async () => {
-		"use server"
-		return await db.select().from(table)
+		const rows = await db.select().from(table)
+		return rows.map((r: any) => ({ ...r }))
 	}
 
 	const getById = async (id: string | number) => {
-		"use server"
-		const idColumn = Object.entries(table).find(
-			([_, value]) => value.primary === true
-		)?.[0] as keyof typeof table
+		const idColumnEntry = Object.entries(table).find(
+			([_, value]) => (value as any).primary === true
+		)
+
+		const idColumnKey = idColumnEntry?.[0] as keyof typeof table | undefined
+		const idColumn = idColumnKey ? (table as any)[idColumnKey] : undefined
 
 		if (!idColumn) {
 			throw new Error("No primary key found in table")
 		}
 
-		// @ts-ignore - This is a dynamic query
-		return await db.select().from(table).where(table[idColumn].eq(id)).limit(1)
+		const rows = await db.select().from(table).where(eq(idColumn, id as any)).limit(1)
+		const row = rows[0]
+		return row ? ({ ...row } as any) : null
 	}
 
 	const create = async (data: Partial<T>) => {
-		"use server"
-
 		try {
-			// @ts-ignore - This is a dynamic insert
-			const result = await db.insert(table).values(data)
+			const result = await (db as any).insert(table).values(data)
 			console.log(`Record inserted successfully.`)
 			return result
 		} catch (error) {
@@ -44,19 +45,21 @@ export function generateCrudFunctions<T extends Record<string, any>>(
 	}
 
 	const update = async (id: string | number, data: Partial<T>) => {
-		"use server"
-
-		const idColumn = Object.entries(table).find(
-			([_, value]) => value.primary === true
-		)?.[0] as keyof typeof table
+		const idColumnEntry = Object.entries(table).find(
+			([_, value]) => (value as any).primary === true
+		)
+		const idColumnKey = idColumnEntry?.[0] as keyof typeof table | undefined
+		const idColumn = idColumnKey ? (table as any)[idColumnKey] : undefined
 
 		if (!idColumn) {
 			throw new Error("No primary key found in table")
 		}
 
 		try {
-			// @ts-ignore - This is a dynamic update
-			const result = await db.update(table).set(data).where(table[idColumn].eq(id))
+			const result = await (db as any)
+				.update(table)
+				.set(data)
+				.where(eq(idColumn, id as any))
 			console.log(`Record updated successfully.`)
 			return result
 		} catch (error) {
@@ -68,19 +71,18 @@ export function generateCrudFunctions<T extends Record<string, any>>(
 	}
 
 	const remove = async (id: string | number) => {
-		"use server"
-
-		const idColumn = Object.entries(table).find(
-			([_, value]) => value.primary === true
-		)?.[0] as keyof typeof table
+		const idColumnEntry = Object.entries(table).find(
+			([_, value]) => (value as any).primary === true
+		)
+		const idColumnKey = idColumnEntry?.[0] as keyof typeof table | undefined
+		const idColumn = idColumnKey ? (table as any)[idColumnKey] : undefined
 
 		if (!idColumn) {
 			throw new Error("No primary key found in table")
 		}
 
 		try {
-			// @ts-ignore - This is a dynamic delete
-			const result = await db.delete(table).where(table[idColumn].eq(id))
+			const result = await (db as any).delete(table).where(eq(idColumn, id as any))
 			console.log(`Record deleted successfully.`)
 			return result
 		} catch (error) {

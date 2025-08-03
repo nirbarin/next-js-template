@@ -1,22 +1,21 @@
-import { integer, text, timestamp, primaryKey, pgTable } from "drizzle-orm/pg-core"
+import { integer, text, sqliteTable, primaryKey } from "drizzle-orm/sqlite-core"
 import type { AdapterAccountType } from "@auth/core/adapters"
 
-export const users = pgTable("user", {
-	id: text("id")
-		.primaryKey()
-		.$defaultFn(() => crypto.randomUUID()),
+// Users table (SQLite/D1)
+export const users = sqliteTable("user", {
+	id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
 	name: text("name"),
 	email: text("email").unique(),
-	emailVerified: timestamp("emailVerified", { mode: "date" }),
+	// D1/SQLite: store dates as text or integer (unix epoch). We'll store ISO string in text.
+	emailVerified: text("emailVerified"),
 	image: text("image"),
 })
 
-export const accounts = pgTable(
+// Accounts table (SQLite/D1)
+export const accounts = sqliteTable(
 	"account",
 	{
-		userId: text("userId")
-			.notNull()
-			.references(() => users.id, { onDelete: "cascade" }),
+		userId: text("userId").notNull(),
 		type: text("type").$type<AdapterAccountType>().notNull(),
 		provider: text("provider").notNull(),
 		providerAccountId: text("providerAccountId").notNull(),
@@ -29,35 +28,33 @@ export const accounts = pgTable(
 		session_state: text("session_state"),
 	},
 	(account) => ({
-		compoundKey: primaryKey({
-			columns: [account.provider, account.providerAccountId],
-		}),
+		compoundKey: primaryKey({ columns: [account.provider, account.providerAccountId] }),
 	})
 )
 
-export const sessions = pgTable("session", {
+// Sessions table (SQLite/D1)
+export const sessions = sqliteTable("session", {
 	sessionToken: text("sessionToken").primaryKey(),
-	userId: text("userId")
-		.notNull()
-		.references(() => users.id, { onDelete: "cascade" }),
-	expires: timestamp("expires", { mode: "date" }).notNull(),
+	userId: text("userId").notNull(),
+	// Store expires as ISO text for simplicity
+	expires: text("expires").notNull(),
 })
 
-export const verificationTokens = pgTable(
+// Verification tokens table (SQLite/D1)
+export const verificationTokens = sqliteTable(
 	"verificationToken",
 	{
 		identifier: text("identifier").notNull(),
 		token: text("token").notNull(),
-		expires: timestamp("expires", { mode: "date" }).notNull(),
+		expires: text("expires").notNull(),
 	},
 	(verificationToken) => ({
-		compositePk: primaryKey({
-			columns: [verificationToken.identifier, verificationToken.token],
-		}),
+		compositePk: primaryKey({ columns: [verificationToken.identifier, verificationToken.token] }),
 	})
 )
 
-export const customerTable = pgTable("customers", {
+// Customers
+export const customerTable = sqliteTable("customers", {
 	customerId: integer("customerId").primaryKey(),
 	companyName: text("companyName").notNull(),
 	contactName: text("contactName").notNull(),
