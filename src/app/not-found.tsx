@@ -2,6 +2,11 @@
 
 import Link from "next/link"
 
+/**
+ * Renders a styled 404 error page with navigation links for users who reach a non-existent route.
+ *
+ * Displays a prominent "404" badge, a headline, a descriptive message, and links to the home page, features page, and a report issue page.
+ */
 export default function NotFound() {
 	return (
 		<section className="relative">

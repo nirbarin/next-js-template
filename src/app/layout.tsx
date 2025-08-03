@@ -29,6 +29,14 @@ const navbarConfig = {
 	],
 	showThemeToggle: true,
 }
+
+/**
+ * Defines the root layout for the Next.js application, applying global theming, navigation, and structure.
+ *
+ * Wraps all page content with a theme provider, displays a configurable navigation bar, and ensures consistent layout and styling across the app.
+ *
+ * @param children - The page content to be rendered within the main layout
+ */
 export default function RootLayout({
 	children,
 }: Readonly<{

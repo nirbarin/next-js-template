@@ -3,6 +3,11 @@ import Feature from "@/components/usr/feature"
 import Section from "@/components/usr/section"
 import Hero from "@/components/usr/hero"
 
+/**
+ * Renders a feature overview page highlighting key product capabilities, detailed sections, and calls to action.
+ *
+ * Displays a hero banner, a grid of feature highlights, detailed informational sections, and navigation links for user engagement.
+ */
 export default function FeaturesPage() {
 	return (
 		<section className="relative">

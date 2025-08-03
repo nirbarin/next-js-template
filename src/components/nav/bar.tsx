@@ -32,6 +32,14 @@ type NavbarConfig = {
 	showThemeToggle?: boolean
 }
 
+/**
+ * Renders a responsive navigation bar with optional logo, navigation links, action items, and a theme toggle for a Next.js application.
+ *
+ * The navigation bar adapts its layout for different screen sizes, displaying a horizontal menu on larger screens and a slide-in sheet menu on mobile devices. Navigation and action items support external links, and the active navigation item is highlighted based on the current route.
+ *
+ * @param config - Configuration object specifying logo, navigation items, action items, and theme toggle visibility
+ * @param className - Optional additional class names for the header element
+ */
 export default function Navbar({
 	config,
 	className,
@@ -41,6 +49,11 @@ export default function Navbar({
 }) {
 	const pathname = usePathname()
 	const { logo, nav = [], actions = [], showThemeToggle = true } = config
+  const getIsActive = (href: string) => {
+  return href !== "/" && pathname?.startsWith(href)
+    ? true
+    : pathname === href
+}
 
 	return (
 		<header className={cn("w-full border-b bg-background", className)}>
@@ -133,23 +146,13 @@ export default function Navbar({
 								</SheetPrimitive.Close>
 							</SheetHeader>
 							<div className="mt-4 flex flex-col gap-1">
-								{nav.map((item) => {
-// extract the duplicated “isActive” logic into a helper
-const getIsActive = (href: string) => {
-  return href !== "/" && pathname?.startsWith(href)
-    ? true
-    : pathname === href;
-};
 
-{nav.map((item) => {
--  const isActive =
--    item.href !== "/" && pathname?.startsWith(item.href)
--      ? true
--      : pathname === item.href
-+  const isActive = getIsActive(item.href);
+              {nav.map((item) => {
+              const isActive = item.href !== "/" && pathname?.startsWith(item.href)
+                    ? true
+                    : pathname === item.href
+                const isActive = getIsActive(item.href)
 
-  // …rest of your rendering logic
-})}
 									return (
 										<Link
 											key={item.href + item.label}

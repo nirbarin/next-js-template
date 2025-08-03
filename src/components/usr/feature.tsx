@@ -1,3 +1,10 @@
+/**
+ * Displays a styled card featuring a title and description.
+ *
+ * @param title - The heading text to display
+ * @param desc - The descriptive text shown below the title
+ * @returns A React element rendering the feature card
+ */
 export default function Feature({ title, desc }: { title: string; desc: string }) {
 	return (
 		<div className="rounded-lg border bg-card p-6">

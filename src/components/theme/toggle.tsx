@@ -9,6 +9,12 @@ type ThemeToggleProps = {
 	className?: string
 }
 
+/**
+ * Renders a button that toggles between light and dark themes.
+ *
+ * @param className - Optional additional CSS class names for custom styling
+ * @returns A button component that switches the application theme when clicked
+ */
 export default function ThemeToggle({ className }: ThemeToggleProps) {
 	const { setTheme, theme } = useTheme()
 
