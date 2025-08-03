@@ -1,26 +1,18 @@
 import Link from "next/link"
 import Feature from "@/components/usr/feature"
 import Section from "@/components/usr/section"
+import Hero from "@/components/usr/hero"
 
 export default function FeaturesPage() {
 	return (
 		<section className="relative">
-			{/* Hero */}
 			<div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-				<div className="text-center">
-					<span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-						Features
-					</span>
-					<h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-						Everything you need to move from idea to product
-					</h1>
-					<p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-						A thoughtful toolkit of components, patterns, and defaults. Customize
-						deeply, ship quickly, and keep your codebase tidy as you scale.
-					</p>
-				</div>
+				<Hero
+					tag="Features"
+					title="Everything you need to move from idea to product"
+					description="A thoughtful toolkit of components, patterns, and defaults. Customize deeply, ship quickly, and keep your codebase tidy as you scale."
+				/>
 
-				{/* Feature grid */}
 				<div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 					<Feature
 						title="App Router"
@@ -49,7 +41,6 @@ export default function FeaturesPage() {
 				</div>
 			</div>
 
-			{/* Deep dives */}
 			<div className="mx-auto grid max-w-5xl gap-16 border-y px-4 py-16 sm:px-6 lg:px-8">
 				<Section
 					kicker="UI/UX"

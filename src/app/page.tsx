@@ -20,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Feature from "@/components/usr/feature"
+import Hero from "@/components/usr/hero"
 
 export const runtime = "edge"
 
@@ -30,32 +31,25 @@ export default async function Home() {
 	return (
 		<section className="relative">
 			<div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-				<div className="text-center">
-					<span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-						Welcome
-					</span>
-					<h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-						Build, iterate, and launch with confidence
-					</h1>
-					<p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-						A clean Next.js foundation with shadcn/ui and thoughtful defaults; designed
-						to help you move fast without sacrificing quality.
-					</p>
+				<Hero
+					tag="Welcome"
+					title="Build, iterate, and launch with confidence"
+					description="A clean Next.js foundation with shadcn/ui and thoughtful defaults; designed to help you move fast without sacrificing quality."
+				/>
 
-					<div className="mt-6 flex items-center justify-center gap-3">
-						<Link
-							href="/signup"
-							className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition hover:opacity-90"
-						>
-							Get Started
-						</Link>
-						<Link
-							href="/features"
-							className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium transition hover:bg-accent"
-						>
-							Explore Features
-						</Link>
-					</div>
+				<div className="mt-6 flex items-center justify-center gap-3">
+					<Link
+						href="/signup"
+						className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition hover:opacity-90"
+					>
+						Get Started
+					</Link>
+					<Link
+						href="/features"
+						className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium transition hover:bg-accent"
+					>
+						Explore Features
+					</Link>
 				</div>
 
 				<div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
