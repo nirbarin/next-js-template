@@ -1,22 +1,29 @@
-import { db } from "@/server/db"
 import { customerTable } from "@/server/db/schema"
-import { revalidatePath } from "next/cache"
+import { generateCrudFunctions } from "./utils/crud-generator"
+import type { InferSelectModel } from "drizzle-orm"
 
 export const runtime = "edge"
 
-export const getCustomers = async () => {
-	"use server"
+// Define the type for customers
+type Customer = InferSelectModel<typeof customerTable>
 
-	return await db.select().from(customerTable)
-}
+// Generate CRUD functions for customers
+export const {
+	getAll: getCustomers,
+	getById: getCustomerById,
+	create: createCustomer,
+	update: updateCustomer,
+	remove: deleteCustomer,
+} = generateCrudFunctions<Customer>(customerTable)
 
+// Custom function that keeps your existing implementation
 export const createCustomerWithCustomId = async (formData: FormData) => {
 	"use server"
 
 	const customerId = formData.get("customerId")
 
 	try {
-		await db.insert(customerTable).values({
+		await createCustomer({
 			customerId: Number(customerId),
 			companyName: "Alfreds Futterkiste",
 			contactName: "Maria Anders",
@@ -25,7 +32,5 @@ export const createCustomerWithCustomId = async (formData: FormData) => {
 		console.log("Customer inserted successfully.")
 	} catch (error) {
 		console.error("Error inserting customer:", error)
-	} finally {
-		revalidatePath("/")
 	}
 }
