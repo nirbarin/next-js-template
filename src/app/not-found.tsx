@@ -34,33 +34,15 @@ export default function NotFound() {
 					</div>
 				</div>
 
-				<div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-					<CardLink
-						title="About"
-						desc="Learn more about this template’s philosophy."
-						href="/about"
-					/>
-					<CardLink
-						title="Sign In"
-						desc="Access your account and continue where you left off."
-						href="/signin"
-					/>
-					<CardLink
-						title="Get Started"
-						desc="Create an account and start building today."
-						href="/signup"
-					/>
+				<div className="mt-12 flex w-full items-center justify-center">
+					<Link
+						href="/report"
+						className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium transition hover:bg-accent"
+					>
+						Report an Issue
+					</Link>
 				</div>
 			</div>
 		</section>
-	)
-}
-
-function CardLink({ title, desc, href }: { title: string; desc: string; href: string }) {
-	return (
-		<Link href={href} className="bg-color rounded-lg border-2 p-6">
-			<h3 className="text-lg font-semibold">{title}</h3>
-			<p className="mt-2 text-sm text-muted-foreground">{desc}</p>
-		</Link>
 	)
 }
