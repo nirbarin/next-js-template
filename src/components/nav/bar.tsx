@@ -126,11 +126,11 @@ export default function Navbar({
 							<SheetHeader>
 								<SheetTitle className="text-lg">{logo?.label ?? "Menu"}</SheetTitle>
 								<SheetPrimitive.Close asChild>
-    <Button variant="ghost" size="icon">
-      <X className="h-5 w-5" />
-      <span className="sr-only">Close</span>
-    </Button>
-  </SheetPrimitive.Close>
+									<Button variant="ghost" size="icon">
+										<X className="h-5 w-5" />
+										<span className="sr-only">Close</span>
+									</Button>
+								</SheetPrimitive.Close>
 							</SheetHeader>
 							<div className="mt-4 flex flex-col gap-1">
 								{nav.map((item) => {
