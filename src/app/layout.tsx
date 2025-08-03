@@ -36,6 +36,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
+			<head>
+				<link
+					rel="shortcut icon"
+					href="https://nirbar.in/favicon.png"
+					type="image/x-icon"
+				/>
+			</head>
 			<body className={inter.className}>
 				<ThemeProvider
 					attribute="class"
